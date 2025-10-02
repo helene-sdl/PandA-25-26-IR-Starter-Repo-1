@@ -6,6 +6,7 @@ from .sonnet import SONNET
 
 def manual_count_occurrences(text: str, pattern: str) -> int:
     """TODO: implement naive manual scan counting overlapping occurrences.
+
     Requirements:
     - case-insensitive (e.g., caller will lowercase inputs)
     - no str.find, no 'in' for text search, no regex
