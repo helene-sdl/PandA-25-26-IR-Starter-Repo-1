@@ -3,6 +3,7 @@
 from .constants import BANNER, HELP
 from .sonnet import SONNET
 
+
 def manual_count_occurrences(text: str, pattern: str) -> int:
     """TODO: implement naive manual scan counting overlapping occurrences.
     Requirements:
@@ -13,10 +14,21 @@ def manual_count_occurrences(text: str, pattern: str) -> int:
     if not text or not pattern:
         return 0
     # >>> replace the following with a real manual scan <<<
-    return 0
+    text = text.lower()
+    pattern = pattern.lower()
+    pattern_length = len(pattern)
+    text_length = len(text)
+    # counter
+    count = 0
+    for i in range(text_length - pattern_length + 1):
+        if text[i: i + pattern_length] == pattern:
+            count += 1
+    return count
+
 
 def print_result(query: str, total: int, title_count: int, line_count: int) -> None:
     print(f"Matches for \"{query}\": {total} (title: {title_count}, lines: {line_count})")
+
 
 def main() -> None:
     print(BANNER)
@@ -45,10 +57,18 @@ def main() -> None:
         #  Call your implementation of the function manual_count_occurrences to get the counts in the title and the
         #  lines of the sonnet.
 
+        title = SONNET["title"]
+        lines = SONNET["lines"]
         title_count = 0
+        title_count += manual_count_occurrences(title, raw)
+
         line_count = 0
+        for line in lines:
+            line_count += manual_count_occurrences(line, raw)
+
         total = title_count + line_count
         print_result(raw, total, title_count, line_count)
+
 
 if __name__ == "__main__":
     main()
